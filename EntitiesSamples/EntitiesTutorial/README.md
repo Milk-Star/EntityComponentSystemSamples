@@ -527,7 +527,7 @@ When working on larger projects which are split over multiple assemblies, explic
         {
             // ComponentLookup structures have to be initialized once.
             // The parameter specifies if the lookups will be read only or if they should allow writes.
-            m_LocalToWorldTransformFromEntity = state.GetComponentLookup<WorldTransform>(true);
+            m_WorldTransformLookup = state.GetComponentLookup<WorldTransform>(true);
         }
 
         [BurstCompile]
@@ -1246,7 +1246,7 @@ With the three primitives selected, use the "Add Component" button in the inspec
             }
 
             var cameraTransform = CameraSingleton.Instance.transform;
-            var tankTransform = GetComponent<LocalToWorld>(Target);
+            var tankTransform = SystemAPI.GetComponent<LocalToWorld>(Target);
             cameraTransform.position = tankTransform.Position - 10.0f * tankTransform.Forward + new float3(0.0f, 5.0f, 0.0f);
             cameraTransform.LookAt(tankTransform.Position, new float3(0.0f, 1.0f, 0.0f));
         }
